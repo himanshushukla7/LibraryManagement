@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <link rel="stylesheet" href="{% static 'library/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Page Title -->
+        <div class="text-center mb-4">
+            <h1 class="display-4">Update Book Details</h1>
+        </div>
+
+        <!-- Update Book Form -->
+        <form method="POST" class="bg-light p-4 rounded shadow">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="book_name">Book Name</label>
+                <input type="text" name="book_name" id="book_name" value="{{ book.book_name }}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="book_id">Book ID</label>
+                <input type="text" name="book_id" id="book_id" value="{{ book.book_id }}" class="form-control" readonly>
+                <!-- Making Book ID read-only since it usually doesn’t change -->
+            </div>
+
+            <div class="form-group">
+                <label for="author_name">Author Name</label>
+                <input type="text" name="author_name" id="author_name" value="{{ book.author_name }}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="book_status">Book Status</label>
+                <select name="book_status" id="book_status" class="form-control">
+                    <option value="Available" {% if book.book_status == "Available" %}selected{% endif %}>Available</option>
+                    <option value="Issued" {% if book.book_status == "Issued" %}selected{% endif %}>Issued</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="card_id">Card ID</label>
+                <input type="text" name="card_id" id="card_id" value="{{ book.card_id }}" class="form-control">
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg mt-3">Update Book</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary btn-lg mt-3">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

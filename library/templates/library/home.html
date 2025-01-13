@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{% static 'library/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-4 mb-4">
+        <h1>Library Management System</h1>
+        <form action="{% url 'search_books' %}" method="get" class="form-inline justify-content-center mt-3">
+            <input type="text" name="q" placeholder="Search books" class="form-control mr-2" required>
+            <button type="submit" class="btn btn-light">Search</button>
+        </form>
+        <a href="{% url 'add_book' %}" class="btn btn-success mt-3">Add New Book</a>
+    </header>
+    
+    <!-- Book List -->
+    <div class="container">
+        <div class="book-list">
+            <h2 class="text-center mb-4">All Books</h2>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Book ID</th>
+                        <th>Author Name</th>
+                        <th>Status</th>
+                        <th>Card ID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>{{ book.book_name }}</td>
+                        <td>{{ book.book_id }}</td>
+                        <td>{{ book.author_name }}</td>
+                        <td>{{ book.book_status }}</td>
+                        <td>{{ book.card_id }}</td>
+                        <td>
+                            <a href="{% url 'update_book' book.book_id %}" class="btn btn-info btn-sm">Update</a>
+                            <a href="{% url 'remove_book' book.book_id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
