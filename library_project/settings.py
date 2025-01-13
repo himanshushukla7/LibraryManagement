@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_7(6mk#^tx$g1c=@dfk63bnbw-6@jax&kgqkd$t=!o3q@k@9lh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['librarymanagement-7ctx.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -51,6 +51,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'library_project.urls'
+
+WSGI_APPLICATION = 'library_project.wsgi.application'
+
 
 TEMPLATES = [
     {
